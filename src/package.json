@@ -1,0 +1,18 @@
+{
+  "name": "kafkanodedocker",
+  "version": "1.0.0",
+  "description": "Node-Api with kafka",
+  "main": "index.js",
+  "dependencies": {
+    "@types/restify": "^8.4.2",
+    "kafka-node": "^5.0.0",
+    "nodemon": "^2.0.2",
+    "restify": "^8.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robson Adorno",
+  "license": "ISC"
+}
