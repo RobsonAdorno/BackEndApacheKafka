@@ -1,4 +1,5 @@
 import restify from 'restify'
+import { Router } from '../routes/router'
 
 export class Server {
     application: restify.Server
@@ -7,31 +8,34 @@ export class Server {
         this.application = application!
     }
 
-    initServer():Promise<any> {
+    initServer(routers: Router):Promise<any> {
         return new Promise((resolve, reject) => {
             try {
-                this.createConfig(resolve)
+                this.createConfig(routers,resolve)
 
             } catch(exception) {
                 console.error(' => Error in Server class')
+                reject(exception)
                 throw new Error(exception)
             }
         })
     }
 
-    createConfig(resolve:any) {
+    createConfig(routers:Router,resolve:any) {
         this.application = restify.createServer({
             version: '1.0.0'
         })
 
         this.application.use(restify.plugins.bodyParser())
 
+        routers.allRouters(this.application)
+
         this.application.listen(8080, () => {
             resolve(this.application)
         })
     }
 
-     bootstrap():Promise<Server> {
-        return this.initServer().then(() => this)
+     bootstrap(routers:Router):Promise<Server> {
+        return this.initServer(routers).then(() => this)
     }
 }

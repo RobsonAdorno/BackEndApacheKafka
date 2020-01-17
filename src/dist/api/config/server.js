@@ -8,28 +8,30 @@ class Server {
     constructor(application) {
         this.application = application;
     }
-    initServer() {
+    initServer(routers) {
         return new Promise((resolve, reject) => {
             try {
-                this.createConfig(resolve);
+                this.createConfig(routers, resolve);
             }
             catch (exception) {
                 console.error(' => Error in Server class');
+                reject(exception);
                 throw new Error(exception);
             }
         });
     }
-    createConfig(resolve) {
+    createConfig(routers, resolve) {
         this.application = restify_1.default.createServer({
             version: '1.0.0'
         });
         this.application.use(restify_1.default.plugins.bodyParser());
+        routers.allRouters(this.application);
         this.application.listen(8080, () => {
             resolve(this.application);
         });
     }
-    bootstrap() {
-        return this.initServer().then(() => this);
+    bootstrap(routers) {
+        return this.initServer(routers).then(() => this);
     }
 }
 exports.Server = Server;

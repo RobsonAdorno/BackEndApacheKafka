@@ -5,7 +5,7 @@ class CommonRouter extends router_1.Router {
     constructor() {
         super(...arguments);
         this.save = (req, res) => {
-            const [{ name, age }] = req.body;
+            res.json('BOA');
         };
     }
 }

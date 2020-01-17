@@ -1,8 +1,10 @@
-import { Server } from "./api/config/server";
+import { Server } from './api/config/server'
+import { UserRouter } from './api/routes/user/userRouter'
 
-const server = new Server
+const server = new Server()
+const userRouter = new UserRouter()
 
-server.bootstrap()  
+server.bootstrap(userRouter)  
         .then((serverConfig) => {
                 console.log(serverConfig.application.address())
         })

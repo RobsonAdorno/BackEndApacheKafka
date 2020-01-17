@@ -1,5 +1,6 @@
 import EventEmmiter from 'events'
+import restify from 'restify'
 
 export abstract class Router {
-    abstract allRouters():void
+    abstract allRouters(application: restify.Server):void
 }

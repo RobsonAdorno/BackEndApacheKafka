@@ -1,5 +1,13 @@
 import { Router } from "../router";
+import { CommonRouter } from "../commonRouter";
 
-export abstract class UserRouter extends Router {
+import restify from 'restify'
+
+export class UserRouter extends CommonRouter {
     
+    allRouters(application: restify.Server) {
+        application.get('/', async (req, resp) => {
+            return resp.json('BOA!')
+        })
+    }
 }
